@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 2,
+  "flags": [],
+  "history": [],
+  "records": [
+    {
+      "actionInstanceID": "sample-work-action-001",
+      "settlementID": "sample-settlement-001",
+      "settled": true,
+      "context": {
+        "action": "work",
+        "day": 1,
+        "timePeriod": "morning",
+        "moneyAfterSettlement": 13600,
+        "playerName": "阿杰",
+        "backgroundAsset": "shop",
+        "locationName": "便利商店"
+      },
+      "status": "pending",
+      "noEventReason": null,
+      "selected": null
+    }
+  ],
+  "triggeredEventIDs": []
+}

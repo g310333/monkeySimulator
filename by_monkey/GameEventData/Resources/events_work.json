@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 2,
+  "events": [
+    {
+      "id": "work_monologue_001",
+      "revision": 1,
+      "enabled": true,
+      "title": "下班後的心聲",
+      "trigger": {
+        "action": "work",
+        "timing": "after_settlement"
+      },
+      "conditions": {
+        "minimumDay": 1,
+        "maximumDay": null,
+        "minimumMoney": 0,
+        "maximumMoney": null,
+        "timePeriods": [],
+        "requiredCompletedEventIDs": [],
+        "requiredFlags": [],
+        "excludedFlags": []
+      },
+      "selectionWeight": 1,
+      "background": {
+        "mode": "inherit"
+      },
+      "participants": [
+        "player"
+      ],
+      "dialogues": [
+        {
+          "id": "line_001",
+          "speakerID": "player",
+          "text": "今天總算忙完了。雖然站得有點累，但離買車又近了一點。",
+          "stage": [
+            {
+              "characterID": "player",
+              "slot": "center"
+            }
+          ]
+        },
+        {
+          "id": "line_002",
+          "speakerID": "player",
+          "text": "先把這筆錢存好，接下來要做什麼呢？",
+          "stage": [
+            {
+              "characterID": "player",
+              "slot": "center"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "work_boss_chat_001",
+      "revision": 1,
+      "enabled": true,
+      "title": "店長的叮嚀",
+      "trigger": {
+        "action": "work",
+        "timing": "after_settlement"
+      },
+      "conditions": {
+        "minimumDay": 1,
+        "maximumDay": null,
+        "minimumMoney": 0,
+        "maximumMoney": null,
+        "timePeriods": [],
+        "requiredCompletedEventIDs": [],
+        "requiredFlags": [],
+        "excludedFlags": []
+      },
+      "selectionWeight": 1,
+      "background": {
+        "mode": "inherit"
+      },
+      "participants": [
+        "boss",
+        "player"
+      ],
+      "dialogues": [
+        {
+          "id": "line_001",
+          "speakerID": "boss",
+          "text": "{playerName}，今天辛苦了。剛才尖峰時段，你處理得還不錯。",
+          "stage": [
+            {
+              "characterID": "boss",
+              "slot": "left"
+            },
+            {
+              "characterID": "player",
+              "slot": "right"
+            }
+          ]
+        },
+        {
+          "id": "line_002",
+          "speakerID": "player",
+          "text": "謝謝店長，我還在熟悉收銀機，有時候會慢一點。",
+          "stage": [
+            {
+              "characterID": "boss",
+              "slot": "left"
+            },
+            {
+              "characterID": "player",
+              "slot": "right"
+            }
+          ]
+        },
+        {
+          "id": "line_003",
+          "speakerID": "boss",
+          "text": "慢慢來，把帳算對比較重要。路上小心，明天見。",
+          "stage": [
+            {
+              "characterID": "boss",
+              "slot": "left"
+            },
+            {
+              "characterID": "player",
+              "slot": "right"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "work_handover_001",
+      "revision": 1,
+      "enabled": true,
+      "title": "交班前的小插曲",
+      "trigger": {
+        "action": "work",
+        "timing": "after_settlement"
+      },
+      "conditions": {
+        "minimumDay": 1,
+        "maximumDay": null,
+        "minimumMoney": 0,
+        "maximumMoney": null,
+        "timePeriods": [],
+        "requiredCompletedEventIDs": [],
+        "requiredFlags": [],
+        "excludedFlags": []
+      },
+      "selectionWeight": 1,
+      "background": {
+        "mode": "inherit"
+      },
+      "participants": [
+        "boss",
+        "player",
+        "coworker"
+      ],
+      "dialogues": [
+        {
+          "id": "line_001",
+          "speakerID": "boss",
+          "text": "你們先等一下，今天的交班有件事要提醒。",
+          "stage": [
+            {
+              "characterID": "boss",
+              "slot": "left"
+            },
+            {
+              "characterID": "player",
+              "slot": "center"
+            },
+            {
+              "characterID": "coworker",
+              "slot": "right"
+            }
+          ]
+        },
+        {
+          "id": "line_002",
+          "speakerID": "coworker",
+          "text": "是冰箱裡那批新到的飲料嗎？我已經補好了。",
+          "stage": [
+            {
+              "characterID": "boss",
+              "slot": "left"
+            },
+            {
+              "characterID": "player",
+              "slot": "center"
+            },
+            {
+              "characterID": "coworker",
+              "slot": "right"
+            }
+          ]
+        },
+        {
+          "id": "line_003",
+          "speakerID": "player",
+          "text": "我也把庫存數量記下來了，清單放在櫃檯旁邊。",
+          "stage": [
+            {
+              "characterID": "boss",
+              "slot": "left"
+            },
+            {
+              "characterID": "player",
+              "slot": "center"
+            },
+            {
+              "characterID": "coworker",
+              "slot": "right"
+            }
+          ]
+        },
+        {
+          "id": "line_004",
+          "speakerID": "boss",
+          "text": "很好，有互相幫忙就順多了。今天辛苦了，早點回去休息。",
+          "stage": [
+            {
+              "characterID": "boss",
+              "slot": "left"
+            },
+            {
+              "characterID": "player",
+              "slot": "center"
+            },
+            {
+              "characterID": "coworker",
+              "slot": "right"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Game Event rules v1",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "work",
+              "stocks",
+              "mountain_ride",
+              "shopping"
+            ]
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "eventChance": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "action",
+          "enabled",
+          "eventChance"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 4,
+      "maxItems": 4
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "rules"
+  ],
+  "additionalProperties": false
+}

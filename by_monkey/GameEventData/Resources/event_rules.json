@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "rules": [
+    {
+      "action": "work",
+      "enabled": false,
+      "eventChance": 0
+    },
+    {
+      "action": "stocks",
+      "enabled": false,
+      "eventChance": 0
+    },
+    {
+      "action": "mountain_ride",
+      "enabled": false,
+      "eventChance": 0
+    },
+    {
+      "action": "shopping",
+      "enabled": false,
+      "eventChance": 0
+    }
+  ]
+}

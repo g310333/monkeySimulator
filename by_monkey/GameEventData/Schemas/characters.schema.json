@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Game Event characters v1",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "name": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "enum": [
+                  "fixed",
+                  "playerName"
+                ]
+              },
+              "fallback": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "source",
+              "fallback"
+            ],
+            "additionalProperties": false
+          },
+          "portraitAsset": {
+            "type": "string",
+            "minLength": 1
+          },
+          "presentation": {
+            "type": "object",
+            "properties": {
+              "sampling": {
+                "type": "string",
+                "enum": [
+                  "nearest",
+                  "linear"
+                ]
+              },
+              "scale": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 3
+              },
+              "offsetX": {
+                "type": "number",
+                "minimum": -1,
+                "maximum": 1
+              },
+              "offsetY": {
+                "type": "number",
+                "minimum": -1,
+                "maximum": 1
+              }
+            },
+            "required": [
+              "sampling",
+              "scale",
+              "offsetX",
+              "offsetY"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "portraitAsset",
+          "presentation"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "characters"
+  ],
+  "additionalProperties": false
+}

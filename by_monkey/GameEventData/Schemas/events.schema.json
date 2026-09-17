@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Game Event events v2",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "trigger": {
+            "type": "object",
+            "properties": {
+              "action": {
+                "type": "string",
+                "enum": [
+                  "work",
+                  "stocks",
+                  "mountain_ride",
+                  "shopping"
+                ]
+              },
+              "timing": {
+                "type": "string",
+                "enum": [
+                  "after_settlement"
+                ]
+              }
+            },
+            "required": [
+              "action",
+              "timing"
+            ],
+            "additionalProperties": false
+          },
+          "conditions": {
+            "type": "object",
+            "properties": {
+              "minimumDay": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "maximumDay": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "minimumMoney": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "maximumMoney": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "timePeriods": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "morning",
+                    "afternoon",
+                    "night"
+                  ]
+                },
+                "uniqueItems": true
+              },
+              "requiredCompletedEventIDs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9_]*$"
+                },
+                "uniqueItems": true
+              },
+              "requiredFlags": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9_]*$"
+                },
+                "uniqueItems": true
+              },
+              "excludedFlags": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9_]*$"
+                },
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "minimumDay",
+              "minimumMoney",
+              "timePeriods",
+              "requiredCompletedEventIDs",
+              "requiredFlags",
+              "excludedFlags"
+            ],
+            "additionalProperties": false
+          },
+          "selectionWeight": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "background": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "mode": {
+                    "type": "string",
+                    "enum": [
+                      "inherit"
+                    ]
+                  }
+                },
+                "required": [
+                  "mode"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "mode": {
+                    "type": "string",
+                    "enum": [
+                      "asset"
+                    ]
+                  },
+                  "assetName": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "mode",
+                  "assetName"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "participants": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]*$"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "dialogues": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9_]*$"
+                },
+                "speakerID": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9_]*$"
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "stage": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "characterID": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_]*$"
+                      },
+                      "slot": {
+                        "type": "string",
+                        "enum": [
+                          "left",
+                          "center",
+                          "right"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "characterID",
+                      "slot"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "minItems": 1,
+                  "maxItems": 3
+                }
+              },
+              "required": [
+                "id",
+                "speakerID",
+                "text",
+                "stage"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "id",
+          "revision",
+          "enabled",
+          "title",
+          "trigger",
+          "conditions",
+          "selectionWeight",
+          "background",
+          "participants",
+          "dialogues"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "events"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 2,
+  "flags": [],
+  "history": [],
+  "records": [
+    {
+      "actionInstanceID": "sample-work-action-001",
+      "settlementID": "sample-settlement-001",
+      "settled": true,
+      "context": {
+        "action": "work",
+        "day": 1,
+        "timePeriod": "morning",
+        "moneyAfterSettlement": 13600,
+        "playerName": "阿杰",
+        "backgroundAsset": "shop",
+        "locationName": "便利商店"
+      },
+      "status": "in_progress",
+      "noEventReason": null,
+      "selected": {
+        "snapshot": {
+          "event": {
+            "id": "work_boss_chat_001",
+            "revision": 1,
+            "enabled": true,
+            "title": "店長的叮嚀",
+            "trigger": {
+              "action": "work",
+              "timing": "after_settlement"
+            },
+            "conditions": {
+              "minimumDay": 1,
+              "maximumDay": null,
+              "minimumMoney": 0,
+              "maximumMoney": null,
+              "timePeriods": [],
+              "requiredCompletedEventIDs": [],
+              "requiredFlags": [],
+              "excludedFlags": []
+            },
+            "selectionWeight": 1,
+            "background": {
+              "mode": "inherit"
+            },
+            "participants": [
+              "boss",
+              "player"
+            ],
+            "dialogues": [
+              {
+                "id": "line_001",
+                "speakerID": "boss",
+                "text": "{playerName}，今天辛苦了。剛才尖峰時段，你處理得還不錯。",
+                "stage": [
+                  {
+                    "characterID": "boss",
+                    "slot": "left"
+                  },
+                  {
+                    "characterID": "player",
+                    "slot": "right"
+                  }
+                ]
+              },
+              {
+                "id": "line_002",
+                "speakerID": "player",
+                "text": "謝謝店長，我還在熟悉收銀機，有時候會慢一點。",
+                "stage": [
+                  {
+                    "characterID": "boss",
+                    "slot": "left"
+                  },
+                  {
+                    "characterID": "player",
+                    "slot": "right"
+                  }
+                ]
+              },
+              {
+                "id": "line_003",
+                "speakerID": "boss",
+                "text": "慢慢來，把帳算對比較重要。路上小心，明天見。",
+                "stage": [
+                  {
+                    "characterID": "boss",
+                    "slot": "left"
+                  },
+                  {
+                    "characterID": "player",
+                    "slot": "right"
+                  }
+                ]
+              }
+            ]
+          },
+          "characters": [
+            {
+              "id": "player",
+              "name": {
+                "source": "playerName",
+                "fallback": "玩家"
+              },
+              "portraitAsset": "player",
+              "presentation": {
+                "sampling": "nearest",
+                "scale": 1,
+                "offsetX": 0,
+                "offsetY": 0
+              }
+            },
+            {
+              "id": "boss",
+              "name": {
+                "source": "fixed",
+                "fallback": "店長"
+              },
+              "portraitAsset": "boss",
+              "presentation": {
+                "sampling": "nearest",
+                "scale": 1,
+                "offsetX": 0,
+                "offsetY": 0
+              }
+            }
+          ]
+        },
+        "currentDialogueID": "line_002"
+      }
+    }
+  ],
+  "triggeredEventIDs": [
+    "work_boss_chat_001"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 2,
+  "events": [
+    {
+      "id": "work_new_event_001",
+      "revision": 1,
+      "enabled": false,
+      "title": "替換成你的事件標題",
+      "trigger": {
+        "action": "work",
+        "timing": "after_settlement"
+      },
+      "conditions": {
+        "minimumDay": 1,
+        "maximumDay": null,
+        "minimumMoney": 0,
+        "maximumMoney": null,
+        "timePeriods": [],
+        "requiredCompletedEventIDs": [],
+        "requiredFlags": [],
+        "excludedFlags": []
+      },
+      "selectionWeight": 1,
+      "background": {
+        "mode": "inherit"
+      },
+      "participants": [
+        "player"
+      ],
+      "dialogues": [
+        {
+          "id": "line_001",
+          "speakerID": "player",
+          "text": "替換成你的台詞。",
+          "stage": [
+            {
+              "characterID": "player",
+              "slot": "center"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

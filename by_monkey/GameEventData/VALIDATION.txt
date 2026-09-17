@@ -1,0 +1,7 @@
+資料驗證：PASS
+10 份資料檔通過格式與語意檢查（characters／rules 為 schemaVersion 1，events／save 為 schemaVersion 2）。
+3 個對話事件範例。
+14 個反例成功攔截（未知說話者、重複 ID、矛盾條件、前置循環、未知欄位、空台詞、重複站位、非法機率、缺少選取內容、錯誤游標、未結算、重複行動、同一事件被多個行動重複觸發、triggeredEventIDs 與已選取事件不一致）。
+v2 變更：events_work.json 移除 repeatable；save 新增 triggeredEventIDs，作為同一事件在同一存檔一生只觸發一次的唯一依據，與 history／completionCount（僅供 requiredCompletedEventIDs 前置條件）分開記錄。
+Swift / UIKit：本環境無 Swift 或 Xcode，未編譯／執行；已在專案的 by_monkeyTests 內另行以真實 App Bundle 內容與 Codable 模型驗證並通過。
+Assets：本包不包含圖片，需在專案內核對資產名稱。

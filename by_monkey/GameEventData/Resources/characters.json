@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "characters": [
+    {
+      "id": "player",
+      "name": {
+        "source": "playerName",
+        "fallback": "玩家"
+      },
+      "portraitAsset": "player",
+      "presentation": {
+        "sampling": "nearest",
+        "scale": 1.5,
+        "offsetX": 0,
+        "offsetY": 0
+      }
+    },
+    {
+      "id": "boss",
+      "name": {
+        "source": "fixed",
+        "fallback": "店長"
+      },
+      "portraitAsset": "boss",
+      "presentation": {
+        "sampling": "nearest",
+        "scale": 1.5,
+        "offsetX": 0,
+        "offsetY": 0
+      }
+    },
+    {
+      "id": "coworker",
+      "name": {
+        "source": "fixed",
+        "fallback": "同事"
+      },
+      "portraitAsset": "store_uniform_neutral",
+      "presentation": {
+        "sampling": "linear",
+        "scale": 1.5,
+        "offsetX": 0,
+        "offsetY": 0
+      }
+    }
+  ]
+}

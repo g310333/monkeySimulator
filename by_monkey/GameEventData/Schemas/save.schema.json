@@ -1,0 +1,518 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Game Event save v2",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "flags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*$"
+      },
+      "uniqueItems": true
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "eventID": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "completionCount": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "lastCompletedActionInstanceID": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "eventID",
+          "completionCount",
+          "lastCompletedActionInstanceID"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "actionInstanceID": {
+            "type": "string",
+            "minLength": 1
+          },
+          "settlementID": {
+            "type": "string",
+            "minLength": 1
+          },
+          "settled": {
+            "const": true
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "action": {
+                "type": "string",
+                "enum": [
+                  "work",
+                  "stocks",
+                  "mountain_ride",
+                  "shopping"
+                ]
+              },
+              "day": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "timePeriod": {
+                "type": "string",
+                "enum": [
+                  "morning",
+                  "afternoon",
+                  "night"
+                ]
+              },
+              "moneyAfterSettlement": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "playerName": {
+                "type": "string",
+                "minLength": 1
+              },
+              "backgroundAsset": {
+                "type": "string",
+                "minLength": 1
+              },
+              "locationName": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "action",
+              "day",
+              "timePeriod",
+              "moneyAfterSettlement",
+              "playerName",
+              "backgroundAsset",
+              "locationName"
+            ],
+            "additionalProperties": false
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "no_event",
+              "in_progress",
+              "completed"
+            ]
+          },
+          "noEventReason": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "disabled",
+                  "no_eligible_events",
+                  "chance_missed"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "selected": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "snapshot": {
+                    "type": "object",
+                    "properties": {
+                      "event": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "^[a-z][a-z0-9_]*$"
+                          },
+                          "revision": {
+                            "type": "integer",
+                            "minimum": 1
+                          },
+                          "enabled": {
+                            "type": "boolean"
+                          },
+                          "title": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "trigger": {
+                            "type": "object",
+                            "properties": {
+                              "action": {
+                                "type": "string",
+                                "enum": [
+                                  "work",
+                                  "stocks",
+                                  "mountain_ride",
+                                  "shopping"
+                                ]
+                              },
+                              "timing": {
+                                "type": "string",
+                                "enum": [
+                                  "after_settlement"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "action",
+                              "timing"
+                            ],
+                            "additionalProperties": false
+                          },
+                          "conditions": {
+                            "type": "object",
+                            "properties": {
+                              "minimumDay": {
+                                "type": "integer",
+                                "minimum": 1
+                              },
+                              "maximumDay": {
+                                "anyOf": [
+                                  {
+                                    "type": "integer",
+                                    "minimum": 1
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              },
+                              "minimumMoney": {
+                                "type": "integer",
+                                "minimum": 0
+                              },
+                              "maximumMoney": {
+                                "anyOf": [
+                                  {
+                                    "type": "integer",
+                                    "minimum": 0
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              },
+                              "timePeriods": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "enum": [
+                                    "morning",
+                                    "afternoon",
+                                    "night"
+                                  ]
+                                },
+                                "uniqueItems": true
+                              },
+                              "requiredCompletedEventIDs": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "pattern": "^[a-z][a-z0-9_]*$"
+                                },
+                                "uniqueItems": true
+                              },
+                              "requiredFlags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "pattern": "^[a-z][a-z0-9_]*$"
+                                },
+                                "uniqueItems": true
+                              },
+                              "excludedFlags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "pattern": "^[a-z][a-z0-9_]*$"
+                                },
+                                "uniqueItems": true
+                              }
+                            },
+                            "required": [
+                              "minimumDay",
+                              "minimumMoney",
+                              "timePeriods",
+                              "requiredCompletedEventIDs",
+                              "requiredFlags",
+                              "excludedFlags"
+                            ],
+                            "additionalProperties": false
+                          },
+                          "selectionWeight": {
+                            "type": "integer",
+                            "minimum": 1
+                          },
+                          "background": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "mode": {
+                                    "type": "string",
+                                    "enum": [
+                                      "inherit"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "mode"
+                                ],
+                                "additionalProperties": false
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "mode": {
+                                    "type": "string",
+                                    "enum": [
+                                      "asset"
+                                    ]
+                                  },
+                                  "assetName": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  }
+                                },
+                                "required": [
+                                  "mode",
+                                  "assetName"
+                                ],
+                                "additionalProperties": false
+                              }
+                            ]
+                          },
+                          "participants": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "pattern": "^[a-z][a-z0-9_]*$"
+                            },
+                            "minItems": 1,
+                            "uniqueItems": true
+                          },
+                          "dialogues": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "^[a-z][a-z0-9_]*$"
+                                },
+                                "speakerID": {
+                                  "type": "string",
+                                  "pattern": "^[a-z][a-z0-9_]*$"
+                                },
+                                "text": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "stage": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "characterID": {
+                                        "type": "string",
+                                        "pattern": "^[a-z][a-z0-9_]*$"
+                                      },
+                                      "slot": {
+                                        "type": "string",
+                                        "enum": [
+                                          "left",
+                                          "center",
+                                          "right"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "characterID",
+                                      "slot"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  "minItems": 1,
+                                  "maxItems": 3
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "speakerID",
+                                "text",
+                                "stage"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "minItems": 1
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "revision",
+                          "enabled",
+                          "title",
+                          "trigger",
+                          "conditions",
+                          "selectionWeight",
+                          "background",
+                          "participants",
+                          "dialogues"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "characters": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "^[a-z][a-z0-9_]*$"
+                            },
+                            "name": {
+                              "type": "object",
+                              "properties": {
+                                "source": {
+                                  "type": "string",
+                                  "enum": [
+                                    "fixed",
+                                    "playerName"
+                                  ]
+                                },
+                                "fallback": {
+                                  "type": "string",
+                                  "minLength": 1
+                                }
+                              },
+                              "required": [
+                                "source",
+                                "fallback"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "portraitAsset": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "presentation": {
+                              "type": "object",
+                              "properties": {
+                                "sampling": {
+                                  "type": "string",
+                                  "enum": [
+                                    "nearest",
+                                    "linear"
+                                  ]
+                                },
+                                "scale": {
+                                  "type": "number",
+                                  "exclusiveMinimum": 0,
+                                  "maximum": 3
+                                },
+                                "offsetX": {
+                                  "type": "number",
+                                  "minimum": -1,
+                                  "maximum": 1
+                                },
+                                "offsetY": {
+                                  "type": "number",
+                                  "minimum": -1,
+                                  "maximum": 1
+                                }
+                              },
+                              "required": [
+                                "sampling",
+                                "scale",
+                                "offsetX",
+                                "offsetY"
+                              ],
+                              "additionalProperties": false
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "name",
+                            "portraitAsset",
+                            "presentation"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "minItems": 1
+                      }
+                    },
+                    "required": [
+                      "event",
+                      "characters"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "currentDialogueID": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9_]*$"
+                  }
+                },
+                "required": [
+                  "snapshot",
+                  "currentDialogueID"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "actionInstanceID",
+          "settlementID",
+          "settled",
+          "context",
+          "status"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "triggeredEventIDs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*$"
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "flags",
+    "history",
+    "records",
+    "triggeredEventIDs"
+  ],
+  "additionalProperties": false
+}
